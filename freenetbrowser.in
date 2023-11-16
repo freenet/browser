@@ -114,7 +114,7 @@ if ! test -d $DIRECTORY && ! test -z $ARG_INSTALL; then
     wget -N -O new_installer_offline.jar "${LATEST_DOWNLOAD_URL}" || curl -q -f -L -o new_installer_offline.jar "${LATEST_DOWNLOAD_URL}"
     # check the release against Freenet dev keys, because we do not trust github
     TMPDIR=$(mktemp -d)
-    curl https://freenetproject.org/assets/keyring.gpg -o ${TMPDIR}/keyring.gpg && gpg --homedir=${TMPDIR} --import ${TMPDIR}/keyring.gpg
+    wget https://freenetproject.org/assets/keyring.gpg -O ${TMPDIR}/keyring.gpg && gpg --homedir=${TMPDIR} --import ${TMPDIR}/keyring.gpg
     if ! gpg --homedir=${TMPDIR} --verify new_installer_offline.jar.sig; then
         echo Freenet installer signature new_installer_offline.jar.sig fails to verify. Please check the error above.
         read -p "Continue? [yN] " yn
